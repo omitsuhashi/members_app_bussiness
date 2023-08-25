@@ -1,4 +1,4 @@
-import 'package:business/pages/auth/signin.dart';
+import 'package:business/pages/qr_reader.dart';
 import 'package:business/pages/sample.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
             // User が null である、つまり未サインインのサインイン画面へ
             return Scaffold(
                 appBar: AppBar(title: const Text("ログイン")),
-                body: const SigninPage());
+                body: const QrReaderPage());
           },
         ),
       );

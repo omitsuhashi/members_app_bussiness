@@ -1,3 +1,4 @@
+import 'package:business/pages/auth/signin.dart';
 import 'package:business/pages/sample.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class App extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              // スプラッシュ画面などに書き換えても良い
+              // スプラッシュ画面
               return const SizedBox();
             }
             if (snapshot.hasData) {
@@ -21,8 +22,8 @@ class App extends StatelessWidget {
             }
             // User が null である、つまり未サインインのサインイン画面へ
             return Scaffold(
-                appBar: AppBar(title: const Text("ログイン画面")),
-                body: const MyApp());
+                appBar: AppBar(title: const Text("ログイン")),
+                body: const SigninPage());
           },
         ),
       );

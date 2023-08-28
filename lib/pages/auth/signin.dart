@@ -1,4 +1,5 @@
 import 'package:base/components/organisms/auth_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
@@ -9,17 +10,15 @@ class SigninPage extends StatefulWidget {
 }
 
 class SigninState extends State<SigninPage> {
-  final _formKey = GlobalKey<FormState>();
+  final auth = FirebaseAuth.instance;
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  onPressSigninButton() {
-    if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("..サインイン中")));
-      print(emailController.text);
-      print(passwordController.text);
+  onPressSigninButton(String email, String password) {
+    print(email);
+    print(password);
+    try {
+      auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      // TODO エラーハンドリングを行う
     }
   }
 
@@ -27,7 +26,7 @@ class SigninState extends State<SigninPage> {
   Widget build(BuildContext context) {
     return AuthFormWidget(
       onPressSubmit: onPressSigninButton,
-      submitButtonText: "サインイン",
+      authType: AuthType.signin,
     );
   }
 }
